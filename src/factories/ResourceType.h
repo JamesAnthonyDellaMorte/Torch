@@ -77,6 +77,15 @@ enum class ResourceType {
     AdpcmLoop = 0x4150434C,    // APCL
     AdpcmBook = 0x41504342,    // APCB
     Envelope = 0x45564C50,     // EVLP
-    AudioTable = 0x4154424C    // ATBL
+    AudioTable = 0x4154424C,   // ATBL
+
+    // HM64
+    TextData = 0x48545844,      // HTXD
+    TextIndex = 0x48545849,     // HTXI
+    CutsceneData = 0x48435444,  // HCTD
+    FontTexture = 0x48465458,   // HFTX
+    FontPalette = 0x4846504C,   // HFPL
+    DialogueData = 0x48444744,  // HDGD
+    DialogueIndex = 0x48444749  // HDGI
 };
 } // namespace Torch

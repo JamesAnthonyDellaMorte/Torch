@@ -103,6 +103,13 @@
 #include "factories/naudio/v1/SequenceFactory.h"
 #endif
 
+#ifdef HM64_SUPPORT
+#include "factories/hm64/CutsceneFactory.h"
+#include "factories/hm64/DialogueFactory.h"
+#include "factories/hm64/FontFactory.h"
+#include "factories/hm64/TextFactory.h"
+#endif
+
 #include "preprocess/CompTool.h"
 
 using namespace std::chrono;
@@ -228,6 +235,16 @@ void Companion::Init(const ExportType type, std::atomic<size_t>& assetCount) {
     this->RegisterFactory("NAUDIO:V1:ADPCM_LOOP", std::make_shared<ADPCMLoopFactory>());
     this->RegisterFactory("NAUDIO:V1:ADPCM_BOOK", std::make_shared<ADPCMBookFactory>());
     this->RegisterFactory("NAUDIO:V1:SEQUENCE", std::make_shared<NSequenceFactory>());
+#endif
+
+#ifdef HM64_SUPPORT
+    this->RegisterFactory("HM64:CUTSCENE_DATA", std::make_shared<HM64::CutsceneDataFactory>());
+    this->RegisterFactory("HM64:DIALOGUE_DATA", std::make_shared<HM64::DialogueDataFactory>());
+    this->RegisterFactory("HM64:DIALOGUE_INDEX", std::make_shared<HM64::DialogueIndexFactory>());
+    this->RegisterFactory("HM64:FONT_PALETTE", std::make_shared<HM64::FontPaletteFactory>());
+    this->RegisterFactory("HM64:FONT_TEXTURE", std::make_shared<HM64::FontTextureFactory>());
+    this->RegisterFactory("HM64:TEXT_DATA", std::make_shared<HM64::TextDataFactory>());
+    this->RegisterFactory("HM64:TEXT_INDEX", std::make_shared<HM64::TextIndexFactory>());
 #endif
 #ifndef __EMSCRIPTEN__ // We call this manually
     this->Process(assetCount);
