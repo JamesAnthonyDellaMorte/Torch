@@ -107,6 +107,7 @@
 #include "factories/hm64/CutsceneFactory.h"
 #include "factories/hm64/DialogueFactory.h"
 #include "factories/hm64/FontFactory.h"
+#include "factories/hm64/SpriteFactory.h"
 #include "factories/hm64/TextFactory.h"
 #endif
 
@@ -243,6 +244,9 @@ void Companion::Init(const ExportType type, std::atomic<size_t>& assetCount) {
     this->RegisterFactory("HM64:DIALOGUE_INDEX", std::make_shared<HM64::DialogueIndexFactory>());
     this->RegisterFactory("HM64:FONT_PALETTE", std::make_shared<HM64::FontPaletteFactory>());
     this->RegisterFactory("HM64:FONT_TEXTURE", std::make_shared<HM64::FontTextureFactory>());
+    this->RegisterFactory("HM64:SPRITE_ASSETS_INDEX", std::make_shared<HM64::SpriteAssetsIndexFactory>());
+    this->RegisterFactory("HM64:SPRITE_SPRITESHEET_INDEX", std::make_shared<HM64::SpriteSpritesheetIndexFactory>());
+    this->RegisterFactory("HM64:SPRITE_TEXTURE", std::make_shared<HM64::SpriteTextureFactory>());
     this->RegisterFactory("HM64:TEXT_DATA", std::make_shared<HM64::TextDataFactory>());
     this->RegisterFactory("HM64:TEXT_INDEX", std::make_shared<HM64::TextIndexFactory>());
 #endif
