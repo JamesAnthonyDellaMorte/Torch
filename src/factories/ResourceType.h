@@ -87,6 +87,10 @@ enum class ResourceType {
     FontPalette = 0x4846504C,   // HFPL
     DialogueData = 0x48444744,  // HDGD
     DialogueIndex = 0x48444749, // HDGI
+    AudioSequence = 0x48415351, // HASQ
+    AudioPointerBank = 0x48415042, // HAPB
+    AudioWaveTable = 0x48415754, // HAWT
+    MapData = 0x484D4150, // HMAP
     SpriteTexture = 0x48535458, // HSTX
     SpriteAssetsIndex = 0x48534149, // HSAI
     SpriteSpritesheetIndex = 0x48535349 // HSSI

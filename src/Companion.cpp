@@ -104,9 +104,11 @@
 #endif
 
 #ifdef HM64_SUPPORT
+#include "factories/hm64/AudioFactory.h"
 #include "factories/hm64/CutsceneFactory.h"
 #include "factories/hm64/DialogueFactory.h"
 #include "factories/hm64/FontFactory.h"
+#include "factories/hm64/MapFactory.h"
 #include "factories/hm64/SpriteFactory.h"
 #include "factories/hm64/TextFactory.h"
 #endif
@@ -239,11 +241,15 @@ void Companion::Init(const ExportType type, std::atomic<size_t>& assetCount) {
 #endif
 
 #ifdef HM64_SUPPORT
+    this->RegisterFactory("HM64:AUDIO_POINTER_BANK", std::make_shared<HM64::AudioPointerBankFactory>());
+    this->RegisterFactory("HM64:AUDIO_SEQUENCE", std::make_shared<HM64::AudioSequenceFactory>());
+    this->RegisterFactory("HM64:AUDIO_WAVE_TABLE", std::make_shared<HM64::AudioWaveTableFactory>());
     this->RegisterFactory("HM64:CUTSCENE_DATA", std::make_shared<HM64::CutsceneDataFactory>());
     this->RegisterFactory("HM64:DIALOGUE_DATA", std::make_shared<HM64::DialogueDataFactory>());
     this->RegisterFactory("HM64:DIALOGUE_INDEX", std::make_shared<HM64::DialogueIndexFactory>());
     this->RegisterFactory("HM64:FONT_PALETTE", std::make_shared<HM64::FontPaletteFactory>());
     this->RegisterFactory("HM64:FONT_TEXTURE", std::make_shared<HM64::FontTextureFactory>());
+    this->RegisterFactory("HM64:MAP_DATA", std::make_shared<HM64::MapDataFactory>());
     this->RegisterFactory("HM64:SPRITE_ASSETS_INDEX", std::make_shared<HM64::SpriteAssetsIndexFactory>());
     this->RegisterFactory("HM64:SPRITE_SPRITESHEET_INDEX", std::make_shared<HM64::SpriteSpritesheetIndexFactory>());
     this->RegisterFactory("HM64:SPRITE_TEXTURE", std::make_shared<HM64::SpriteTextureFactory>());
