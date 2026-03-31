@@ -19,6 +19,7 @@ option(BUILD_PM64 "Build with Paper Mario support" ON)
 option(BUILD_FZERO "Build with F-Zero X support" ON)
 option(BUILD_MARIO_ARTIST "Build with Mario Artist support" ON)
 option(BUILD_NAUDIO "Build with NAudio support" ON)
+option(BUILD_HM64 "Build with Harvest Moon 64 support" ON)
 
 if(EMSCRIPTEN)
     set(BUILD_SM64 OFF) # TODO: This is broken for some reason
@@ -69,8 +70,17 @@ endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
-file(GLOB_RECURSE CXX_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/src/**/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/lib/strhash64/*.cpp)
-file(GLOB C_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c ${CMAKE_CURRENT_SOURCE_DIR}/src/**/*.c ${CMAKE_CURRENT_SOURCE_DIR}/lib/libmio0/*.c ${CMAKE_CURRENT_SOURCE_DIR}/lib/libyay0/*.c)
+file(GLOB_RECURSE CXX_FILES CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/**/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/strhash64/*.cpp
+)
+file(GLOB C_FILES CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/**/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/libmio0/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib/libyay0/*.c
+)
 set(SRC_DIR ${CXX_FILES} ${C_FILES} ${LGFXD_FILES})
 
 if(BUILD_SM64)
@@ -113,6 +123,12 @@ if(BUILD_NAUDIO)
     add_definitions(-DNAUDIO_SUPPORT)
 else()
     list(FILTER SRC_DIR EXCLUDE REGEX "${CMAKE_CURRENT_SOURCE_DIR}/src/factories/naudio/*")
+endif()
+
+if(BUILD_HM64)
+    add_definitions(-DHM64_SUPPORT)
+else()
+    list(FILTER SRC_DIR EXCLUDE REGEX "${CMAKE_CURRENT_SOURCE_DIR}/src/factories/hm64/*")
 endif()
 
 if(ENABLE_ASAN)
